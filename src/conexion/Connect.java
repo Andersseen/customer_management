@@ -11,7 +11,7 @@ import com.mysql.jdbc.CommunicationsException;
 
 
 public class Connect {
-	private static final String NAMEDB = "db_customer";
+	private static final String NAMEDB = "db_management";
 	private static final String CONTROLLER = "com.mysql.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://localhost:3306/" + NAMEDB;
 	private static final String USER = "root";
