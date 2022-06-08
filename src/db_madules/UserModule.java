@@ -28,7 +28,8 @@ public class UserModule {
 	
 	public ResultSet getUser(String user) {
 		try {
-			this.sql =  "SELECT * FROM users US WHERE 1=1 AND US. `user` =" + user + "";
+//			this.sql =  "SELECT * FROM users US WHERE 1=1 AND US.`users`=" + user + "";
+			this.sql =  "SELECT * FROM users US WHERE 1=1 AND US. `username`='" + user + "'";
 			ResultSet rs = this.dbQ.executeQuery(this.sql);
 			return rs;
 		} catch(SQLException ex) {
