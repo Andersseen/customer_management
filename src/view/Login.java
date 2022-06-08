@@ -166,6 +166,10 @@ public class Login extends JFrame implements ActionListener, KeyListener {
 				try {
 					if(userCL.checkLogin(user, pass)) {
 						JOptionPane.showInternalMessageDialog(null, "Bien");
+						
+						this.setVisible(false);
+						new view.Dashboard().setVisible(true);
+						
 					}else {
 						JOptionPane.showInternalMessageDialog(null, "mal");
 					}
