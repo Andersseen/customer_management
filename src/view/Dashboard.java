@@ -34,10 +34,14 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import components.FirstPage;
+import components.MainList;
 import components.SecondPage;
 import components.ThirdPage;
+import controller.DashboardController;
 
 public class Dashboard extends JFrame implements ActionListener{
+	
+	private DashboardController dashboardCL;
 
 	private JPanel bg;
 	private JPanel panelSide;
@@ -47,6 +51,9 @@ public class Dashboard extends JFrame implements ActionListener{
 	private JPanel panelTop;
 	private JLabel titleTopLabel;
 	private JPanel contentPanel;
+	private JButton btnMain;
+	private MainList mainList = new MainList();
+	private JLabel userNameLabel;
 
 
 	public Dashboard() {
@@ -59,6 +66,10 @@ public class Dashboard extends JFrame implements ActionListener{
 		getContentPane().setLayout(null);
 		
 		initPrimary();
+		
+		this.dashboardCL = new DashboardController();
+		
+		userNameLabel.setText(DashboardController.userName);
 	}
 	
 	
@@ -74,16 +85,21 @@ public class Dashboard extends JFrame implements ActionListener{
 		panelSide.setBounds(0, 0, 200, 463);
 		getContentPane().add(panelSide);
 		
+		btnMain = new JButton("List");
+		btnMain.addActionListener(this);
+		btnMain.setBounds(50, 124, 85, 21);
+		panelSide.add(btnMain);
+		
 		btn1 = new JButton("1");
-		btn1.setBounds(54, 136, 85, 21);
+		btn1.setBounds(50, 180, 85, 21);
 		btn1.addActionListener(this);
 		
 		btn2 = new JButton("2");
-		btn2.setBounds(54, 240, 85, 21);
+		btn2.setBounds(50, 253, 85, 21);
 		btn2.addActionListener(this);
 		
 		btn3 = new JButton("3");
-		btn3.setBounds(54, 333, 85, 21);
+		btn3.setBounds(50, 319, 85, 21);
 		btn3.addActionListener(this);
 		
 		panelSide.setLayout(null);
@@ -91,6 +107,13 @@ public class Dashboard extends JFrame implements ActionListener{
 		panelSide.add(btn3);
 		panelSide.add(btn1);
 		
+		userNameLabel = new JLabel("User");
+		userNameLabel.setForeground(SystemColor.text);
+		userNameLabel.setFont(new Font("Ubuntu", Font.BOLD, 30));
+		userNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		userNameLabel.setBounds(0, 0, 200, 101);
+		panelSide.add(userNameLabel);
+
 		panelTop = new JPanel();
 		panelTop.setBackground(SystemColor.info);
 		panelTop.setBounds(200, 5, 600, 100);
@@ -111,6 +134,19 @@ public class Dashboard extends JFrame implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource() == btnMain) {
+
+			mainList.setSize(600, 360);
+			mainList.setLocation(0,0);
+			
+			contentPanel.removeAll();
+			contentPanel.setLayout(null);
+			contentPanel.add(mainList);
+			contentPanel.revalidate();
+			contentPanel.repaint();
+			
+		}
 		if(e.getSource() == btn1) {
 
 			FirstPage page1 = new FirstPage();

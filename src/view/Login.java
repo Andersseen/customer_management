@@ -1,12 +1,11 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.DashboardController;
 import controller.UserController;
 
 import java.awt.Color;
@@ -15,12 +14,10 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.SystemColor;
-import java.awt.Window;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
@@ -28,12 +25,15 @@ import java.sql.SQLException;
 import javax.swing.JPasswordField;
 import javax.swing.UIManager;
 
+@SuppressWarnings("serial")
 public class Login extends JFrame implements ActionListener, KeyListener {
+	
+	public UserController userCL;
+	public DashboardController dashboardCL;
 
 	private JPanel contentPane;
 	private JTextField userField;
 	
-	public UserController userCL;
 	private JLabel titleLabel;
 	private JButton cancelBtn;
 	private JButton accesBtn;
@@ -56,6 +56,7 @@ public class Login extends JFrame implements ActionListener, KeyListener {
 		setResizable(false);
 		
 		this.userCL = new UserController();
+		this.dashboardCL = new DashboardController();
 		
 		initView();
 	}
@@ -167,8 +168,9 @@ public class Login extends JFrame implements ActionListener, KeyListener {
 					if(userCL.checkLogin(user, pass)) {
 						JOptionPane.showInternalMessageDialog(null, "Bien");
 						
-						this.setVisible(false);
-						new view.Dashboard().setVisible(true);						
+						this.dispose();
+						
+						this.dashboardCL.index(user);					
 					}else {
 						JOptionPane.showInternalMessageDialog(null, "mal");
 					}
