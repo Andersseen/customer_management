@@ -1,31 +1,35 @@
 package controller;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import db_madules.UserModule;
+import model.dao.UserDAO;
+import model.vo.UserVO;
 
 public class UserController {
 	
-	private UserModule userModel;
+//	private UserModule userModel;
+	private UserDAO userDAO;
+	private UserVO userVO;
 	
 	public UserController() {
-		this.userModel = new UserModule();
+//		this.userModel = new UserModule();
+		this.userDAO = new UserDAO();
+		
 	}
 	
 	public void index() {
 		new view.Login().setVisible(true);
 	}
 	
-	public boolean checkLogin( String user, String pass) throws SQLException{{
-//	public  boolean checkLogin( String user) throws SQLException{
-	
+	public boolean checkLogin( String username, String pass) throws SQLException {
+
 		try {
-			ResultSet rs = this.userModel.getUser(user);
-			if(rs.next()){
-				if(rs.getString("password").equals(pass)) {
+			userVO = this.userDAO.getUser(username);
+
+			if(userVO != null){
+				if(userVO.getUsername().equals(username) && userVO.getPassword().equals(pass)) {
 					return true;
 				}
 			}
@@ -35,6 +39,5 @@ public class UserController {
 		
 		return false;
 		
-		}
 	}
 }

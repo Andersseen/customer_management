@@ -30,7 +30,7 @@ public class Login extends JFrame implements ActionListener, KeyListener {
 	
 	public UserController userCL;
 	public DashboardController dashboardCL;
-
+	
 	private JPanel contentPane;
 	private JTextField userField;
 	
@@ -57,6 +57,7 @@ public class Login extends JFrame implements ActionListener, KeyListener {
 		
 		this.userCL = new UserController();
 		this.dashboardCL = new DashboardController();
+		
 		
 		initView();
 	}
@@ -158,7 +159,6 @@ public class Login extends JFrame implements ActionListener, KeyListener {
 		if(e.getSource() == accesBtn) {
 			String user = this.userField.getText();	
 			String pass = this.passField.getText();	
-
 			
 			if(!user.equals("") && !pass.equals("")) {
 				try {

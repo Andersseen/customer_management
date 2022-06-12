@@ -1,31 +1,35 @@
 package controller;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import db_madules.UserModule;
+import model.dao.UserDAO;
+import model.vo.UserVO;
 
 
 public class DashboardController {
 	
-	private UserModule userModele;
+//	private UserModule userModele;
+
+	private UserDAO userDAO;
+	private UserVO userVO;
 	
 	public static String user = null;
 	public static String userName = null;
 
 	public DashboardController() {
-		this.userModele = new UserModule();
+//			this.userModele = new UserModule();
+		this.userDAO = new UserDAO();
 	}
 	
 	public void index(String user) {
 		try {
-			ResultSet rs = this.userModele.getUser(user);
+			userVO = this.userDAO.getUser(user);
 			
-			if(rs.next()) {
+			if(userVO != null) {
 				DashboardController.user = user;
-				DashboardController.userName = rs.getNString("name");
+				DashboardController.userName = userVO.getName();
 			}
 			
 			new view.Dashboard().setVisible(true);

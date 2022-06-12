@@ -25,6 +25,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import net.miginfocom.swing.MigLayout;
+import panels.MainList;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.FlowLayout;
@@ -34,7 +36,6 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import components.FirstPage;
-import components.MainList;
 import components.MyButton;
 import components.SecondPage;
 import components.ThirdPage;
@@ -92,6 +93,10 @@ public class Dashboard extends JFrame implements ActionListener{
 		btnMain.setBounds(0, 135, 200, 34);
 		panelSide.add(btnMain);
 		
+		mainList.setSize(700, 540);
+		mainList.setLocation(0,0);
+		
+		
 		btn1 = new MyButton();
 		btn1.setText("Add");
 		btn1.setBounds(0, 179, 200, 34);
@@ -136,6 +141,11 @@ public class Dashboard extends JFrame implements ActionListener{
 		contentPanel.setBounds(200, 60, 700, 540);
 		bg.add(contentPanel);
 		
+		contentPanel.removeAll();
+		contentPanel.setLayout(null);
+		contentPanel.add(mainList);
+		contentPanel.revalidate();
+		contentPanel.repaint();
 		
 	}
 	
