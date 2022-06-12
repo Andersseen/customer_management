@@ -158,10 +158,7 @@ public class Login extends JFrame implements ActionListener, KeyListener {
 		if(e.getSource() == accesBtn) {
 			String user = this.userField.getText();	
 			String pass = this.passField.getText();	
-//			
-//			String message = "User : " + user + "  |Pass: " + pass;
-//			
-//			JOptionPane.showInternalMessageDialog(null, message);
+
 			
 			if(!user.equals("") && !pass.equals("")) {
 				try {
