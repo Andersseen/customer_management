@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 import model.dao.CustomerDAO;
 import model.dao.UserDAO;
 import model.vo.CustomerVO;
@@ -59,10 +61,36 @@ public class DashboardController {
 			
 			return customersList;
 		}catch(SQLException ex) {
-			Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		
 		return customersList;
 	}
+	
+	public void addClient(String name, String lastName, String sex, String birthday, String phone, String email, String note,String date) {
+		customerVO = new CustomerVO();
+		String rs = "Estoy agregando cliente";
+		
+		try {
+
+				customerVO.setName(name);
+				customerVO.setLastName(lastName);
+				customerVO.setSex(sex);
+				customerVO.setBirthday(birthday);
+				customerVO.setPhone(phone);
+				customerVO.setEmail(email);
+				customerVO.setNote(note);
+				customerVO.setDate(date);
+
+			rs = this.customerDAO.addCustomer(customerVO);
+			JOptionPane.showInternalMessageDialog(null, rs);
+
+		}catch(SQLException ex) {
+			Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+			rs = "Algo ha pasado mal";
+		}
+
+	}
+	
 		
 }

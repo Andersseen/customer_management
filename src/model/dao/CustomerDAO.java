@@ -70,12 +70,12 @@ public class CustomerDAO {
 			resultado = "ok";
 		
 		}catch (SQLException e) {
-			System.out.println("No se pudo registrar el estudiante, verifique que el documento no exista: " + e.getMessage());
+			System.out.println("No se pudo registrar el cliente, verifique que el documento no exista: " + e.getMessage());
 			//e.printStackTrace();
 			resultado = "error";
 		}
 		catch (Exception e) {
-			System.out.println("No se pudo registrar el estudiante: " + e.getMessage());
+			System.out.println("No se pudo registrar el cliente: " + e.getMessage());
 			//e.printStackTrace();
 			resultado = "error";
 		}

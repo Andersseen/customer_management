@@ -23,9 +23,11 @@ import java.awt.Insets;
 public class MainList extends JPanel {
 	DefaultTableModel model;
 	
-	DashboardController aaa;
+	DashboardController dashboardCL;
 
 	private JTable table;
+
+	private JScrollPane scrollPane;
 
 	public MainList() {
 		setLayout(null);
@@ -50,10 +52,15 @@ public class MainList extends JPanel {
 		add(content);
 		content.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 0, 709, 354);
 		content.add(scrollPane);
 		
+		
+		
+	}
+	
+	public void createTable() {
 		table = new JTable();
 		
 		model = new DefaultTableModel();
@@ -71,13 +78,13 @@ public class MainList extends JPanel {
 		model.addColumn("Date");
 		
 		scrollPane.setViewportView(table);
-		
 	}
 	
 	public void getListClients() {
-		aaa = new DashboardController();
-		ArrayList<CustomerVO> clients =  aaa.getClients();
+		dashboardCL = new DashboardController();
+		ArrayList<CustomerVO> clients =  dashboardCL.getClients();
 		
+		createTable();
 		for( CustomerVO client : clients ) {
 			Object[] row = new Object[9];
 			
