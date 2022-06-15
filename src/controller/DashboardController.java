@@ -2,6 +2,7 @@ package controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -67,20 +68,20 @@ public class DashboardController {
 		return customersList;
 	}
 	
-	public void addClient(String name, String lastName, String sex, String birthday, String phone, String email, String note,String date) {
+	public void addClient(String name, String lastName, String sex, Date birthday, String phone, String email, String note,Date date) {
 		customerVO = new CustomerVO();
 		String rs = "Estoy agregando cliente";
-		
+				
 		try {
 
 				customerVO.setName(name);
 				customerVO.setLastName(lastName);
 				customerVO.setSex(sex);
-				customerVO.setBirthday(birthday);
+				customerVO.setBirthday((java.sql.Date) birthday);
 				customerVO.setPhone(phone);
 				customerVO.setEmail(email);
 				customerVO.setNote(note);
-				customerVO.setDate(date);
+				customerVO.setDate((java.sql.Date) date);
 
 			rs = this.customerDAO.addCustomer(customerVO);
 			JOptionPane.showInternalMessageDialog(null, rs);

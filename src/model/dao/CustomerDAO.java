@@ -1,6 +1,7 @@
 package model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,11 +61,11 @@ public class CustomerDAO {
 			preStatement.setString(1, client.getName());
 			preStatement.setString(2,client.getLastName());
 			preStatement.setString(3,client.getSex());
-			preStatement.setString(4,client.getBirthday());
+			preStatement.setDate(4,(Date) client.getBirthday());
 			preStatement.setString(5,client.getPhone());
 			preStatement.setString(6,client.getEmail());
 			preStatement.setString(7,client.getNote());
-			preStatement.setString(8,client.getDate());
+			preStatement.setDate(8, (Date) client.getDate());
 			preStatement.execute();
 
 			resultado = "ok";
@@ -110,11 +111,11 @@ public class CustomerDAO {
 				client.setName(result.getString("name"));
 				client.setLastName(result.getString("last_name"));
 				client.setSex(result.getString("sex"));
-				client.setBirthday(result.getString("birthday"));
+				client.setBirthday(result.getDate("birthday"));
 				client.setPhone(result.getString("phone"));
 				client.setEmail(result.getString("email"));
 				client.setNote(result.getString("note"));
-				client.setDate(result.getString("date"));
+				client.setDate(result.getDate("date"));
 			}		
 			   
 		} catch (SQLException e) {
@@ -153,11 +154,11 @@ public class CustomerDAO {
 				client.setName(result.getString("name"));
 				client.setLastName(result.getString("last_name"));
 				client.setSex(result.getString("sex"));
-				client.setBirthday(result.getString("birthday"));
+				client.setBirthday(result.getDate("birthday"));
 				client.setPhone(result.getString("phone"));
 				client.setEmail(result.getString("email"));
 				client.setNote(result.getString("note"));
-				client.setDate(result.getString("date"));
+				client.setDate(result.getDate("date"));
 				
 				listaClients.add(client);
 			}		
@@ -197,11 +198,11 @@ public class CustomerDAO {
 			preStatement.setString(2, client.getName());
 			preStatement.setString(3,client.getLastName());
 			preStatement.setString(4,client.getSex());
-			preStatement.setString(5,client.getBirthday());
+			preStatement.setDate(5,(Date) client.getBirthday());
 			preStatement.setString(6,client.getPhone());
 			preStatement.setString(7,client.getEmail());
 			preStatement.setString(8,client.getNote());
-			preStatement.setString(9,client.getDate());
+			preStatement.setDate(9,(Date) client.getDate());
 			
 			preStatement.executeUpdate();
 			

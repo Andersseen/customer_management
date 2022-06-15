@@ -28,7 +28,11 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 
 public class FirstPage extends JPanel implements ActionListener{
 	
@@ -37,10 +41,8 @@ public class FirstPage extends JPanel implements ActionListener{
 	private JLabel titleLabel;
 	private JTextField inputName;
 	private JTextField inputLastName;
-	private JTextField inputBirthday;
 	private JTextField inputEmail;
 	private JTextField inputNote;
-	private JTextField inputDate;
 	private JTextField inputPhone;
 	private JComboBox selectSex;
 	private JButton btnAdd;
@@ -54,6 +56,14 @@ public class FirstPage extends JPanel implements ActionListener{
 	private JComponent phoneLabel;
 	private Component emailLabel;
 	private JPanel panel;
+
+	private SimpleDateFormat format;
+
+	private Date fechaTxt;
+
+	private JDateChooser inputDate;
+
+	private JDateChooser inputBirthday;
 
 	public FirstPage() {
 		setBackground(SystemColor.menu);
@@ -84,12 +94,6 @@ public class FirstPage extends JPanel implements ActionListener{
 		inputLastName.setBounds(413, 44, 200, 30);
 		panel.add(inputLastName);
 		
-		inputBirthday = new JTextField();
-		inputBirthday.setFont(new Font("Ubuntu", Font.PLAIN, 16));
-		inputBirthday.setColumns(10);
-		inputBirthday.setBounds(63, 119, 200, 30);
-		panel.add(inputBirthday);
-		
 		inputEmail = new JTextField();
 		inputEmail.setFont(new Font("Ubuntu", Font.PLAIN, 16));
 		inputEmail.setColumns(10);
@@ -102,12 +106,6 @@ public class FirstPage extends JPanel implements ActionListener{
 		inputNote.setBounds(413, 275, 200, 30);
 		panel.add(inputNote);
 		
-		inputDate = new JTextField();
-		inputDate.setFont(new Font("Ubuntu", Font.PLAIN, 16));
-		inputDate.setColumns(10);
-		inputDate.setBounds(63, 275, 200, 30);
-		panel.add(inputDate);
-		
 		inputPhone = new JTextField();
 		inputPhone.setFont(new Font("Ubuntu", Font.PLAIN, 16));
 		inputPhone.setColumns(10);
@@ -117,13 +115,13 @@ public class FirstPage extends JPanel implements ActionListener{
 		btnAdd = new JButton("Add");
 		btnAdd.addActionListener(this);
 		btnAdd.setFont(new Font("Ubuntu", Font.PLAIN, 20));
-		btnAdd.setBounds(63, 393, 122, 44);
+		btnAdd.setBounds(325, 402, 122, 44);
 		panel.add(btnAdd);
 		
 		btnClean = new JButton("Clean");
 		btnClean.addActionListener(this);
 		btnClean.setFont(new Font("Ubuntu", Font.PLAIN, 20));
-		btnClean.setBounds(229, 393, 122, 44);
+		btnClean.setBounds(491, 402, 122, 44);
 		panel.add(btnClean);
 		
 		 nameLabel = new JLabel("Name");
@@ -153,7 +151,7 @@ public class FirstPage extends JPanel implements ActionListener{
 		
 		dateLabel = new JLabel("Date");
 		dateLabel.setFont(new Font("Ubuntu", Font.BOLD, 20));
-		dateLabel.setBounds(63, 236, 200, 29);
+		dateLabel.setBounds(63, 251, 200, 29);
 		panel.add(dateLabel);
 	
 		phoneLabel = new JLabel("Phone");
@@ -172,23 +170,50 @@ public class FirstPage extends JPanel implements ActionListener{
 		selectSex.setBounds(413, 120, 200, 26);
 		panel.add(selectSex);
 		
+		inputDate = new JDateChooser();
+		inputDate.setDateFormatString("dd-MM-yyyy");
+		inputDate.setBounds(63, 275, 200, 30);
+		panel.add(inputDate);
+		
+		inputBirthday = new JDateChooser();
+		inputBirthday.setDateFormatString("dd-MM-yyyy");
+		inputBirthday.setBounds(63, 119, 200, 30);
+		panel.add(inputBirthday);
+		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		dashboardCL = new DashboardController();
 		if(e.getSource() == btnAdd) {
-			dashboardCL.addClient(inputName.getText(), inputLastName.getText(),(String) selectSex.getSelectedItem(), inputBirthday.getText(), inputPhone.getText(), inputEmail.getText(), inputNote.getText(), inputDate.getText());
+			Date dateBirthday = inputBirthday.getDate();
+			long d = dateBirthday.getTime();
+			java.sql.Date sqlDateBirthday = new java.sql.Date(d);
+			
+			Date inputDate = inputBirthday.getDate();
+			long a = dateBirthday.getTime();
+			java.sql.Date sqlDateDate = new java.sql.Date(a);
+			
+			dashboardCL.addClient(inputName.getText(),
+					inputLastName.getText(),
+					(String) selectSex.getSelectedItem(),
+					sqlDateBirthday,
+					inputPhone.getText(),
+					inputEmail.getText(),
+					inputNote.getText(),
+					sqlDateDate);
+//			fechaTxt = inputDate.getDate();
+//			JOptionPane.showInternalMessageDialog(null, fechaTxt);
 		}
 		if(e.getSource() == btnClean) {
 			inputName.setText("");
 			inputLastName.setText("");
-			inputBirthday.setText("");
+			inputBirthday.setDate(null);
 			selectSex.setSelectedItem("Hombre");
 			
 			inputPhone.setText("");
 			inputEmail.setText("");
 			inputNote.setText("");
-			inputDate.setText("");
+			inputDate.setDate(null);
 		}
 	}
 }

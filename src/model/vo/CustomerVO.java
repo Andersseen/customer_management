@@ -1,15 +1,17 @@
 package model.vo;
 
+import java.sql.Date;
+
 public class CustomerVO {
 	private int id;
 	private String name;
 	private String lastName;
 	private String sex;
-	private String birthday;
+	private Date birthday;
 	private String phone;
 	private String email;
 	private String note;
-	private String date;
+	private Date date;
 	
 
 //	public CustomerVO( String name, String lastName, String sex, String birthday, String phone, String email,
@@ -35,11 +37,11 @@ public class CustomerVO {
 		return name;
 	}
 	
-	public String getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
+	public void setBirthday(Date birthday2) {
+		this.birthday = birthday2;
 	}
 	public String getPhone() {
 		return phone;
@@ -59,10 +61,10 @@ public class CustomerVO {
 	public void setNote(String note) {
 		this.note = note;
 	}
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	public void setName(String name) {
