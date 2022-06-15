@@ -5,6 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.mysql.jdbc.Statement;
 
 import config.DB;
 import model.vo.CustomerVO;
@@ -12,9 +16,12 @@ import model.vo.CustomerVO;
 
 public class CustomerDAO {
 	
-	Connection connection = null;
-	DB conexion = null;
-	PreparedStatement preStatement = null;
+
+	private Connection connection = null;
+	private DB dbConnect = null;
+	private PreparedStatement preStatement = null;
+		
+	private Statement dbQ;
 	
 //	private String conectar() {
 //		conexion = new DB();
@@ -27,6 +34,16 @@ public class CustomerDAO {
 //		}
 //		return resultado;
 //	}
+	
+	public CustomerDAO() {
+		this.dbConnect = new DB();
+		this.connection = dbConnect.getConnection();
+		try {
+			this.dbQ =  (Statement) this.connection.createStatement();
+		} catch(SQLException ex) {
+			Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 
 	public String addCustomer(CustomerVO client) throws SQLException {
 		
@@ -65,7 +82,7 @@ public class CustomerDAO {
 		finally {
 			preStatement.close();
 			connection.close();
-			conexion.desconnect();
+			dbConnect.desconnect();
 		}
 		return resultado;
 	}
@@ -106,7 +123,7 @@ public class CustomerDAO {
 			result.close();
 			preStatement.close();
 			connection.close();
-			conexion.desconnect();
+			dbConnect.desconnect();
 		}
 		return client;
 	}
@@ -122,7 +139,7 @@ public class CustomerDAO {
 		CustomerVO client=null;
 		
 		String consulta="SELECT id, name, last_name, sex, birthday, phone, email, note, date"
-				+ " FROM customers ";
+				+ " FROM customers";
 		
 		try {
 			preStatement=connection.prepareStatement(consulta);
@@ -141,15 +158,18 @@ public class CustomerDAO {
 				client.setEmail(result.getString("email"));
 				client.setNote(result.getString("note"));
 				client.setDate(result.getString("date"));
+				
+				listaClients.add(client);
 			}		
 			   
 		} catch (SQLException e) {
 			System.out.println("Error en la consulta de personas: "+e.getMessage());
+
 		}finally {
 			result.close();
 			preStatement.close();
 			connection.close();
-			conexion.desconnect();
+			dbConnect.desconnect();
 		}
 			return listaClients;
 	}
@@ -194,7 +214,7 @@ public class CustomerDAO {
         }finally {
 			preStatement.close();
 			connection.close();
-			conexion.desconnect();
+			dbConnect.desconnect();
 		}
 		return resultado;
 	}
@@ -224,7 +244,7 @@ public class CustomerDAO {
 		}finally {
 			preStatement.close();
 			connection.close();
-			conexion.desconnect();
+			dbConnect.desconnect();
 		}
 		return respuesta;
 	}

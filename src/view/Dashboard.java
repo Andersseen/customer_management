@@ -93,9 +93,6 @@ public class Dashboard extends JFrame implements ActionListener{
 		btnMain.setBounds(0, 135, 200, 34);
 		panelSide.add(btnMain);
 		
-		mainList.setSize(700, 540);
-		mainList.setLocation(0,0);
-		
 		
 		btn1 = new MyButton();
 		btn1.setText("Add");
@@ -141,6 +138,11 @@ public class Dashboard extends JFrame implements ActionListener{
 		contentPanel.setBounds(200, 60, 700, 540);
 		bg.add(contentPanel);
 		
+		mainList.setSize(700, 540);
+		mainList.setLocation(0,0);
+		
+		mainList.getListClients();
+		
 		contentPanel.removeAll();
 		contentPanel.setLayout(null);
 		contentPanel.add(mainList);
@@ -155,6 +157,7 @@ public class Dashboard extends JFrame implements ActionListener{
 
 			mainList.setSize(700, 540);
 			mainList.setLocation(0,0);
+			mainList.getListClients();
 			
 			contentPanel.removeAll();
 			contentPanel.setLayout(null);
