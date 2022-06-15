@@ -1,8 +1,8 @@
 package controller;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -77,11 +77,11 @@ public class DashboardController {
 				customerVO.setName(name);
 				customerVO.setLastName(lastName);
 				customerVO.setSex(sex);
-				customerVO.setBirthday((java.sql.Date) birthday);
+				customerVO.setBirthday(birthday);
 				customerVO.setPhone(phone);
 				customerVO.setEmail(email);
 				customerVO.setNote(note);
-				customerVO.setDate((java.sql.Date) date);
+				customerVO.setDate(date);
 
 			rs = this.customerDAO.addCustomer(customerVO);
 			JOptionPane.showInternalMessageDialog(null, rs);
@@ -91,6 +91,18 @@ public class DashboardController {
 			rs = "Algo ha pasado mal";
 		}
 
+	}
+	
+	public void deleteClient(int id) {
+		String rs = "Estoy agregando cliente";
+		
+		try {
+			rs =this.customerDAO.deleteCustomer( id);
+			JOptionPane.showInternalMessageDialog(null, rs);
+		} catch (SQLException ex) {
+			Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+			ex.printStackTrace();
+		}
 	}
 	
 		

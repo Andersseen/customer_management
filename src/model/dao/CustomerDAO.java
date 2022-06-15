@@ -220,7 +220,7 @@ public class CustomerDAO {
 		return resultado;
 	}
 
-	public String daleteCustomer(int id) throws SQLException {
+	public String deleteCustomer(int id) throws SQLException {
 		
 		String respuesta="";
 		
@@ -243,7 +243,7 @@ public class CustomerDAO {
             		+ "al momento de eliminar "+e);
 			respuesta="error";
 		}finally {
-			preStatement.close();
+//			preStatement.close();
 			connection.close();
 			dbConnect.desconnect();
 		}
