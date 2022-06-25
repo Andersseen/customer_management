@@ -3,6 +3,7 @@ package panels;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,32 +30,23 @@ public class MainList extends JPanel {
 
 	private JScrollPane scrollPane;
 
+	private JLabel listLabel;
+
 	public MainList() {
-		setLayout(null);
 		
 		initComponennt();		
 	}
 	
 	private void initComponennt() {
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 700, 100);
-		add(panel);
-		panel.setLayout(null);
+		setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel = new JLabel("Citas");
-		lblNewLabel.setFont(new Font("Ubuntu", Font.BOLD | Font.ITALIC, 20));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(0, 0, 700, 100);
-		panel.add(lblNewLabel);
-		
-		JPanel content = new JPanel();
-		content.setBounds(0, 98, 700, 364);
-		add(content);
-		content.setLayout(new BorderLayout(0, 0));
+		listLabel = new JLabel("Client List");
+		listLabel.setFont(new Font("Ubuntu", Font.PLAIN, 24));
+		listLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		add(listLabel, BorderLayout.NORTH);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 709, 354);
-		content.add(scrollPane);
+		add(scrollPane, BorderLayout.CENTER);
 		
 		
 		
@@ -76,6 +68,8 @@ public class MainList extends JPanel {
 		model.addColumn("Email");
 		model.addColumn("Note");
 		model.addColumn("Date");
+		model.addColumn("%%");
+		model.addColumn("X");
 		
 		scrollPane.setViewportView(table);
 	}

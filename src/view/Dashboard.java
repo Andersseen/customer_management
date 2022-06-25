@@ -44,7 +44,7 @@ public class Dashboard extends JFrame implements ActionListener{
 	public Dashboard() {
 		getContentPane().setBackground(SystemColor.activeCaptionBorder);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 900, 600);
+		setBounds(0, 0, 1024, 600);
 		setLocationRelativeTo(null);
 		setTitle("Index");
 		setResizable(false);
@@ -118,10 +118,10 @@ public class Dashboard extends JFrame implements ActionListener{
 		panelTop.add(titleTopLabel, BorderLayout.CENTER);
 		
 		contentPanel = new JPanel();
-		contentPanel.setBounds(200, 60, 700, 540);
+		contentPanel.setBounds(200, 60, 800, 540);
 		bg.add(contentPanel);
 		
-		mainList.setSize(700, 540);
+		mainList.setSize(800, 540);
 		mainList.setLocation(0,0);
 		
 		mainList.getListClients();
@@ -138,7 +138,7 @@ public class Dashboard extends JFrame implements ActionListener{
 		
 		if(e.getSource() == btnMain) {
 
-			mainList.setSize(700, 540);
+			mainList.setSize(800, 540);
 			mainList.setLocation(0,0);
 			mainList.getListClients();
 			
@@ -152,7 +152,7 @@ public class Dashboard extends JFrame implements ActionListener{
 		if(e.getSource() == btn1) {
 
 			FirstPage page1 = new FirstPage();
-			page1.setSize(700, 540);
+			page1.setSize(800, 540);
 			page1.setLocation(0,0);
 			
 			contentPanel.removeAll();
@@ -166,7 +166,7 @@ public class Dashboard extends JFrame implements ActionListener{
 		if(e.getSource() == btn2) {
 
 			SecondPage page2 = new SecondPage();
-			page2.setSize(700, 540);
+			page2.setSize(800, 540);
 			page2.setLocation(0,0);
 			
 			contentPanel.removeAll();
@@ -180,7 +180,7 @@ public class Dashboard extends JFrame implements ActionListener{
 		if(e.getSource() == btn3) {
 
 			ThirdPage page3 = new ThirdPage();
-			page3.setSize(700, 540);
+			page3.setSize(800, 540);
 			page3.setLocation(0,0);
 			
 			contentPanel.removeAll();
