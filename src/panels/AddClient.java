@@ -34,7 +34,7 @@ import java.awt.event.ActionEvent;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
-public class FirstPage extends JPanel implements ActionListener{
+public class AddClient extends JPanel implements ActionListener{
 	
 	private DashboardController dashboardCL;
 
@@ -65,7 +65,7 @@ public class FirstPage extends JPanel implements ActionListener{
 
 	private JDateChooser inputBirthday;
 
-	public FirstPage() {
+	public AddClient() {
 		setBackground(SystemColor.menu);
 
 		initComponent();

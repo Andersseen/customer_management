@@ -47,8 +47,8 @@ public class CellManagement extends DefaultTableCellRenderer{
 		
 		//definimos colores por defecto
         Color colorFondo = null;
-        Color colorFondoPorDefecto=new Color( 192, 192, 192);
-        Color colorFondoSeleccion=new Color( 140, 140 , 140);
+        Color colorFondoPorDefecto=new Color( 100,100,100);
+        Color colorFondoSeleccion=new Color( 220,0,240);
     	
         /*
          * Si la celda del evento es la seleccionada se asigna el fondo por defecto para la selección
@@ -66,7 +66,7 @@ public class CellManagement extends DefaultTableCellRenderer{
          * Se definen los tipos de datos que contendrán las celdas basado en la instancia que
          * se hace en la ventana de la tabla al momento de construirla
          */
-        if( tipo.equals("texto"))
+        if( tipo.equals("text"))
         {
         	//si es tipo texto define el color de fondo del texto y de la celda así como la alineación
             if (focused) {
@@ -75,17 +75,16 @@ public class CellManagement extends DefaultTableCellRenderer{
     			colorFondo= colorFondoPorDefecto;
     		}
             this.setHorizontalAlignment( JLabel.LEFT );
-            this.setText( (String) value );
-            //this.setForeground( (selected)? new Color(255,255,255) :new Color(0,0,0) );   
-            //this.setForeground( (selected)? new Color(255,255,255) :new Color(32,117,32) );
-            this.setBackground( (selected)? colorFondo :Color.WHITE);	
+            this.setText( (String) value ); 
+            this.setForeground( (selected)? new Color(255,255,255) :new Color(0,0,0) );    
+            this.setBackground( (selected)? colorFondo :Color.WHITE);
             this.setFont(normal);   
             //this.setFont(bold);
             return this;
         }
          
         //si el tipo es icono entonces valida cual icono asignar a la etiqueta.
-        if( tipo.equals("icono"))
+        if( tipo.equals("icon"))
         {
             if( String.valueOf(value).equals("EDIT") )
             {
@@ -102,7 +101,7 @@ public class CellManagement extends DefaultTableCellRenderer{
         }
         
         //definie si el tipo de dato el numerico para personalizarlo
-        if( tipo.equals("numerico"))
+        if( tipo.equals("number"))
         {           
         	if (focused) {
      			colorFondo=colorFondoSeleccion;
@@ -112,7 +111,7 @@ public class CellManagement extends DefaultTableCellRenderer{
         	// System.out.println(value);
             this.setHorizontalAlignment( JLabel.CENTER );
             this.setText( (String) value );            
-            this.setForeground( (selected)? new Color(255,255,255) :new Color(32,117,32) );    
+            this.setForeground( (selected)? new Color(255,255,255) :new Color(100,200,0) );    
             this.setBackground( (selected)? colorFondo :Color.WHITE);
            // this.setBackground( (selected)? colorFondo :Color.MAGENTA);
             this.setFont(bold);            

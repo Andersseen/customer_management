@@ -16,10 +16,9 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
 
-import panels.FirstPage;
+import panels.AddClient;
 import panels.MainList;
-import panels.SecondPage;
-import panels.ThirdPage;
+
 
 import components.MyButton;
 import controller.DashboardController;
@@ -30,9 +29,7 @@ public class Dashboard extends JFrame implements ActionListener{
 
 	private JPanel bg;
 	private JPanel panelSide;
-	private MyButton btn2;
-	private MyButton btn3;
-	private MyButton btn1;
+	private MyButton btnAdd;
 	private JPanel panelTop;
 	private JLabel titleTopLabel;
 	private JPanel contentPanel;
@@ -44,7 +41,7 @@ public class Dashboard extends JFrame implements ActionListener{
 	public Dashboard() {
 		getContentPane().setBackground(SystemColor.activeCaptionBorder);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1024, 600);
+		setBounds(0, 0, 1200, 600);
 		setLocationRelativeTo(null);
 		setTitle("Index");
 		setResizable(false);
@@ -71,32 +68,20 @@ public class Dashboard extends JFrame implements ActionListener{
 		getContentPane().add(panelSide);
 		
 		btnMain = new MyButton();
-		btnMain.setText("List");
+		btnMain.setText("Lista de clientes");
 		btnMain.addActionListener(this);
 		btnMain.setBounds(0, 135, 200, 34);
 		panelSide.add(btnMain);
 		
 		
-		btn1 = new MyButton();
-		btn1.setText("Add");
-		btn1.setBounds(0, 179, 200, 34);
-		btn1.addActionListener(this);
-		
-		btn2 = new MyButton();
-		btn2.setText("Edit");
-		btn2.setBounds(0, 223, 200, 34);
-		btn2.addActionListener(this);
-		
-		btn3 = new MyButton();
-		btn3.setText("Delete");
-		btn3.setBounds(0, 267, 200, 34);
-		btn3.addActionListener(this);
+		btnAdd = new MyButton();
+		btnAdd.setText("Agregar cliente");
+		btnAdd.setBounds(0, 179, 200, 34);
+		btnAdd.addActionListener(this);
 		
 		
 		panelSide.setLayout(null);
-		panelSide.add(btn2);
-		panelSide.add(btn3);
-		panelSide.add(btn1);
+		panelSide.add(btnAdd);
 		
 		userNameLabel = new JLabel("User");
 		userNameLabel.setForeground(SystemColor.text);
@@ -107,7 +92,7 @@ public class Dashboard extends JFrame implements ActionListener{
 
 		panelTop = new JPanel();
 		panelTop.setBackground(SystemColor.info);
-		panelTop.setBounds(200, 0, 700, 60);
+		panelTop.setBounds(200, 0, 1000, 60);
 		getContentPane().add(panelTop);
 		panelTop.setLayout(new BorderLayout(0, 0));
 		
@@ -118,14 +103,12 @@ public class Dashboard extends JFrame implements ActionListener{
 		panelTop.add(titleTopLabel, BorderLayout.CENTER);
 		
 		contentPanel = new JPanel();
-		contentPanel.setBounds(200, 60, 800, 540);
+		contentPanel.setBounds(200, 60, 1000, 540);
 		bg.add(contentPanel);
 		
-		mainList.setSize(800, 540);
+		mainList.setSize(990, 540);
 		mainList.setLocation(0,0);
-		
-		mainList.getListClients();
-		
+				
 		contentPanel.removeAll();
 		contentPanel.setLayout(null);
 		contentPanel.add(mainList);
@@ -138,9 +121,8 @@ public class Dashboard extends JFrame implements ActionListener{
 		
 		if(e.getSource() == btnMain) {
 
-			mainList.setSize(800, 540);
+			mainList.setSize(990, 540);
 			mainList.setLocation(0,0);
-			mainList.getListClients();
 			
 			contentPanel.removeAll();
 			contentPanel.setLayout(null);
@@ -149,10 +131,10 @@ public class Dashboard extends JFrame implements ActionListener{
 			contentPanel.repaint();
 			
 		}
-		if(e.getSource() == btn1) {
+		if(e.getSource() == btnAdd) {
 
-			FirstPage page1 = new FirstPage();
-			page1.setSize(800, 540);
+			AddClient page1 = new AddClient();
+			page1.setSize(1000, 540);
 			page1.setLocation(0,0);
 			
 			contentPanel.removeAll();
@@ -163,33 +145,5 @@ public class Dashboard extends JFrame implements ActionListener{
 			
 		}
 		
-		if(e.getSource() == btn2) {
-
-			SecondPage page2 = new SecondPage();
-			page2.setSize(800, 540);
-			page2.setLocation(0,0);
-			
-			contentPanel.removeAll();
-			contentPanel.setLayout(null);
-			contentPanel.add(page2);
-			contentPanel.revalidate();
-			contentPanel.repaint();
-
-		}
-		
-		if(e.getSource() == btn3) {
-
-			ThirdPage page3 = new ThirdPage();
-			page3.setSize(800, 540);
-			page3.setLocation(0,0);
-			
-			contentPanel.removeAll();
-			contentPanel.setLayout(null);
-			contentPanel.add(page3);
-			contentPanel.revalidate();
-			contentPanel.repaint();
-
-		}
-
 	}
 }
