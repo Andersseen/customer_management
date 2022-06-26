@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
-
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -25,7 +24,7 @@ import controller.DashboardController;
 
 public class Dashboard extends JFrame implements ActionListener{
 	
-	private DashboardController dashboardCL;
+//	private DashboardController dashboardCL;
 
 	private JPanel bg;
 	private JPanel panelSide;
@@ -34,7 +33,8 @@ public class Dashboard extends JFrame implements ActionListener{
 	private JLabel titleTopLabel;
 	private JPanel contentPanel;
 	private JButton btnMain;
-	private MainList mainList = new MainList();
+	private MainList mainList;
+	private AddClient pageAdd;
 	private JLabel userNameLabel;
 
 
@@ -49,11 +49,11 @@ public class Dashboard extends JFrame implements ActionListener{
 		
 		initPrimary();
 		
-		this.dashboardCL = new DashboardController();
+//		this.dashboardCL = new DashboardController();
 		
 		userNameLabel.setText(DashboardController.userName);
 	}
-	
+		
 	
 	private void initPrimary() {
 		
@@ -106,6 +106,7 @@ public class Dashboard extends JFrame implements ActionListener{
 		contentPanel.setBounds(200, 60, 1000, 540);
 		bg.add(contentPanel);
 		
+		mainList = new MainList();
 		mainList.setSize(990, 540);
 		mainList.setLocation(0,0);
 				
@@ -117,10 +118,12 @@ public class Dashboard extends JFrame implements ActionListener{
 		
 	}
 	
+	
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == btnMain) {
 
+			mainList = new MainList();
 			mainList.setSize(990, 540);
 			mainList.setLocation(0,0);
 			
@@ -133,13 +136,13 @@ public class Dashboard extends JFrame implements ActionListener{
 		}
 		if(e.getSource() == btnAdd) {
 
-			AddClient page1 = new AddClient();
-			page1.setSize(1000, 540);
-			page1.setLocation(0,0);
+			pageAdd = new AddClient();
+			pageAdd.setSize(1000, 540);
+			pageAdd.setLocation(0,0);
 			
 			contentPanel.removeAll();
 			contentPanel.setLayout(null);
-			contentPanel.add(page1);
+			contentPanel.add(pageAdd);
 			contentPanel.revalidate();
 			contentPanel.repaint();
 			

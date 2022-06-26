@@ -68,7 +68,7 @@ public class CustomerDAO {
 			preStatement.setDate(8, (Date) client.getDate());
 			preStatement.execute();
 
-			resultado = "ok";
+			resultado = "Cliente agregado";
 		
 		}catch (SQLException e) {
 			System.out.println("No se pudo registrar el cliente, verifique que el documento no exista: " + e.getMessage());
@@ -144,9 +144,10 @@ public class CustomerDAO {
 		
 		try {
 			preStatement=connection.prepareStatement(consulta);
+			
 				
 			result=preStatement.executeQuery();
-				
+			
 			while(result.next()==true){
 				client=new CustomerVO();
 
@@ -187,26 +188,27 @@ public class CustomerDAO {
 					+ "last_name= ? , "
 					+ "sex= ? , "
 					+ "birthday= ? , "
-					+ "phone= ?  "
-					+ "email= ?  "
-					+ "note= ?  "
+					+ "phone= ?  ,"
+					+ "email= ?  ,"
+					+ "note= ?  ,"
 					+ "date= ?  "
-					+ "WHERE id= ?;";
+					+ "WHERE id= ?";
 			preStatement = connection.prepareStatement(consulta);
 
-			preStatement.setInt(1, client.getId());
-			preStatement.setString(2, client.getName());
-			preStatement.setString(3,client.getLastName());
-			preStatement.setString(4,client.getSex());
-			preStatement.setDate(5,(Date) client.getBirthday());
-			preStatement.setString(6,client.getPhone());
-			preStatement.setString(7,client.getEmail());
-			preStatement.setString(8,client.getNote());
-			preStatement.setDate(9,(Date) client.getDate());
+			preStatement.setInt(9, client.getId());
+			preStatement.setString(1, client.getName());
+			preStatement.setString(2,client.getLastName());
+			preStatement.setString(3,client.getSex());
+			preStatement.setDate(4,(Date) client.getBirthday());
+			preStatement.setString(5,client.getPhone());
+			preStatement.setString(6,client.getEmail());
+			preStatement.setString(7,client.getNote());
+			preStatement.setDate(8,(Date) client.getDate());
 			
 			preStatement.executeUpdate();
-			
-          resultado="ok";
+
+					
+          resultado="Cliente esta editado";
           
         }catch(SQLException	 e){
             System.out.println("Ocurrió una excepcion de SQL "

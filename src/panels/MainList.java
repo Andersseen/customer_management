@@ -4,9 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
+
 import java.awt.Font;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
@@ -17,25 +16,27 @@ import components.table.Utilities;
 import controller.DashboardController;
 import model.dao.CustomerDAO;
 import model.vo.CustomerVO;
+import view.Dashboard;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.awt.event.ActionEvent;
+
 import javax.swing.JScrollPane;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+
 
 public class MainList extends JPanel implements MouseListener {
+	private DashboardController dashboardCL;
+	
 	private JScrollPane scrollPaneTabla;
 	private JTable table;
 	ArrayList<CustomerVO> listaClientes;//lista que simula la información de la BD
@@ -75,15 +76,10 @@ public class MainList extends JPanel implements MouseListener {
 	}
 	
 	private void construirTabla() {
-//		listaClientes = new ArrayList<CustomerVO>();
-		CustomerDAO xxx = new CustomerDAO();
+		listaClientes = new ArrayList<CustomerVO>();
+		dashboardCL = new DashboardController();
 		
-		try {
-			listaClientes=xxx.getCustomers();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		listaClientes=dashboardCL.getClients();
 			
 			ArrayList<String> titleList=new ArrayList<>();
 			
@@ -186,11 +182,16 @@ private void construirTabla(String[] titulos, Object[][] data) {
     //se asigna la tabla al scrollPane
     scrollPaneTabla.setViewportView(table);
 
-
 }
 
+	public void refresh() {
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		initComponent();
+		construirTabla();
+		
+		System.out.println("hey");
 	
-	
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -202,11 +203,33 @@ private void construirTabla(String[] titulos, Object[][] data) {
 				 * que solo se produzca algo si selecciono una fila de esa columna
 				 */
 				if (column==Utilities.EDIT) {
+					
+					JOptionPane.showMessageDialog(null, "Esta editando cliente");
+					
+					Utilities.selectedRow = row;
+					
+//					String id = table.getValueAt(row, Utilities.ID).toString();
+					int id = Integer.valueOf(table.getValueAt(row, Utilities.ID).toString());
+					String name = table.getValueAt(row, Utilities.NAME).toString();
+					String lastName = table.getValueAt(row, Utilities.LASTNAME).toString();
+					String sex = table.getValueAt(row, Utilities.SEX).toString();
+					String birthday =  table.getValueAt(row, Utilities.BIRTHDAY).toString();
+					String phone = table.getValueAt(row, Utilities.PHONE).toString();
+					String email = table.getValueAt(row, Utilities.EMAIL).toString();
+					String note = table.getValueAt(row, Utilities.NOTE).toString();
+					String date = table.getValueAt(row, Utilities.DATE).toString();
+					
+					EditClient editPage = new EditClient(id,name,lastName,sex,birthday,phone,email,note,date);
+					editPage.setVisible(true);
 
-					JOptionPane.showMessageDialog(null, "EDIT");
 
 				}else if (column==Utilities.DELETE){
-					JOptionPane.showMessageDialog(null, "DELETE");
+					JOptionPane.showMessageDialog(null, "Esta eliminando cliente");
+					
+					int id = Integer.valueOf(table.getValueAt(row, Utilities.ID).toString());
+					dashboardCL = new DashboardController();
+					dashboardCL.deleteClient(id);
+					construirTabla();
 				}
 		
 	}
